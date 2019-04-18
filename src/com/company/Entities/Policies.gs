@@ -44,10 +44,8 @@ class Policies {
     }
   }
 
-  static function ChangeCar(scan : Scanner){
-    print("Выберите полис")
-    Policies.PrintList()
-    var versions = List.get(scan.nextInt()).Versions
+  function ChangeCar(scan : Scanner){
+    var versions = this.Versions
     var policy = versions.last()
     policy.Print()
 

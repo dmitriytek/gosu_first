@@ -27,7 +27,7 @@ class EditPolicyMenu {
 
       switch (s){
         case "1":
-          Policies.ChangeCar(scan)
+          _policies.ChangeCar(scan)
           break
         case "2":
           _policies.AddCar(scan)
