@@ -148,7 +148,7 @@ class Main {
           Car.Create(scan)
           break
         case "5":
-          Policy.Create(scan)
+          Policies.Create(scan)
           break
         case "6":
           Task.Create(scan)

@@ -9,8 +9,10 @@ class Policy {
   var _created : Date as readonly StartDate
   var _price : double as readonly Price
 
+  var _owner : Person as readonly Owner
 
-  construct(car : Car){
+
+  construct(car : Car, person : Person){
     _id = _count
     _price = 0
     if (car.HasGlass){
@@ -22,15 +24,20 @@ class Policy {
     if (car.HasStealing){
       _price += (150 * car.Volume)
     }
+    _owner = person
     _created = Date.Now
     car.Policy = this
+    _list.add(this)
     _count++;
   }
 
   static function Create(scan : Scanner){
+    print("Выберите владельца")
+    Person.PrintList()
+    var owner = Person.List.get(scan.nextInt())
     print("Выберите автомобиль")
     Car.PrintList()
-    var policy = new Policy(Car.List.get(scan.nextInt()))
+    var policy = new Policy(Car.List.get(scan.nextInt()), owner)
     List.add(policy)
 
     print("id: " + policy.Id)
