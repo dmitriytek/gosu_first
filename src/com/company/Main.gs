@@ -128,7 +128,7 @@ class Main {
       print("2. Создать нового сотрудника")
       print("3. Создать новую рабочую группу")
       print("4. Создать новый автомобиль")
-//      print("5. Создать новый полис")
+      print("5. Создать новый полис")
       print("6. Создать новую задачу")
       print("0. Вернуться")
 
@@ -146,6 +146,9 @@ class Main {
           break
         case "4":
           Car.Create(scan)
+          break
+        case "5":
+          Policy.Create(scan)
           break
         case "6":
           Task.Create(scan)
@@ -165,6 +168,7 @@ class Main {
       print("2. Вывести всех сотрудников")
       print("3. Вывести все группы")
       print("4. Вывести все авто")
+      print("5. Вывести все полисы")
       print("6. Вывести все задачи")
       print("0. Вернуться")
 
@@ -182,6 +186,9 @@ class Main {
           break
         case "4":
           Car.PrintList()
+          break
+        case "5":
+          Policy.PrintList()
           break
         case "6":
           Task.PrintList()

@@ -3,6 +3,11 @@ package com.company.Entities
 uses com.company.Enum.Manufacturer
 
 class Car {
+
+  static final var _glass : int as Glass = 2000
+  static final var _lights : int as Lights = 3000
+  static final var _stealing : int as Stealing = 4000
+
   static var _count : long = 0
   static var _list : List<Car> as List = {}
 
@@ -11,14 +16,28 @@ class Car {
   var _vin : String as Vin
   var _volume : double as Volume
 
+  var _hasGlass : boolean as HasGlass
+  var _hasLights : boolean as HasLights
+  var _hasStealing : boolean as HasStealing
+
   var _manufacturer : Manufacturer as readonly Manufacturer
   var _policy : Policy as Policy
 
-  construct(vin : String, vol : double, man : Manufacturer){
+  construct(
+      vin : String,
+      vol : double,
+      man : Manufacturer,
+      glass : boolean,
+      lights : boolean,
+      st : boolean
+  ){
     _id = _count
     _manufacturer = man
     _vin = vin
     _volume = vol
+    _hasGlass = glass
+    _hasLights = lights
+    _hasStealing = st
     _count++;
   }
 
@@ -48,7 +67,38 @@ class Car {
     var vol = scan.nextDouble()
     print("Введите vin")
     var vin = scan.next()
-    var car = new Car(vin, vol, man)
+    print("Введите покрытия:")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        glass = true
+        break
+      default:
+        glass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        lights = true
+        break
+      default:
+        lights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        st = true
+        break
+      default:
+        st = false
+        break
+    }
+    var car = new Car(vin, vol, man, glass, lights, st)
     print("id: " + car.Id)
     List.add(car)
   }
