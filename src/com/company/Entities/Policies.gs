@@ -68,4 +68,26 @@ class Policies {
       policy.Print()
     }
   }
+
+  function AddCar(scan : Scanner){
+    var policy = this.Versions.last()
+    print("Выберите автомобиль")
+    Car.PrintList()
+    var cars = policy.Cars.copy()
+    cars.add(Car.List.get(scan.nextInt()))
+
+    var newPolicy = new Policy(policy, cars)
+    this.Versions.add(newPolicy)
+  }
+
+  function RemoveCar(scan : Scanner){
+    var policy = this.Versions.last()
+    print("Выберите автомобиль")
+    policy.PrintCars()
+    var cars = policy.Cars.copy()
+    cars.remove(Car.List.get(scan.nextInt()))
+
+    var newPolicy = new Policy(policy, cars)
+    this.Versions.add(newPolicy)
+  }
 }

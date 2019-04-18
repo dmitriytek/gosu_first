@@ -11,7 +11,7 @@ class Policy {
 
   var _owner : Person as readonly Owner
 
-  var _car : Car as readonly Car
+  var _cars : List<Car> as readonly Cars = {}
 
 
   construct(car : Car, person : Person){
@@ -27,7 +27,7 @@ class Policy {
       _price += (150 * car.Volume)
     }
     _owner = person
-    _car = car
+    _cars.add(car)
     _created = Date.Now
     //car.Policy = this
     _list.add(this)
@@ -47,7 +47,30 @@ class Policy {
       _price += (150 * car.Volume)
     }
     _owner = policy.Owner
-    _car = car
+    _cars.clear()
+    _cars.add(car)
+    _created = Date.Now
+    _list.add(this)
+    _count++;
+  }
+
+  construct(policy : Policy, cars : List<Car>){
+    _id = _count
+    _price = 0
+    for (car in cars){
+      if (car.HasGlass){
+        _price += (50 * car.Volume)
+      }
+      if (car.HasLights){
+        _price += (100 * car.Volume)
+      }
+      if (car.HasStealing){
+        _price += (150 * car.Volume)
+      }
+    }
+    _owner = policy.Owner
+    _cars.clear()
+    _cars.addAll(cars)
     _created = Date.Now
     _list.add(this)
     _count++;
@@ -75,6 +98,12 @@ class Policy {
   static function PrintList(){
     for (obj in List){
       obj.Print()
+    }
+  }
+
+  function PrintCars(){
+    for (car in Cars){
+      car.Print()
     }
   }
 
