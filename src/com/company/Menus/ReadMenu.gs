@@ -12,7 +12,8 @@ class ReadMenu {
       print("3. Вывести все группы")
       print("4. Вывести все авто")
       print("5. Вывести все полисы")
-      print("6. Вывести все задачи")
+      print("6. Вывести все версии конкретного полиса")
+      print("7. Вывести все задачи")
       print("0. Вернуться")
 
       var s = scan.next()
@@ -34,6 +35,9 @@ class ReadMenu {
           Policies.PrintList()
           break
         case "6":
+          Policies.PrintSpecificList(scan)
+          break
+        case "7":
           Task.PrintList()
           break
         case "0":

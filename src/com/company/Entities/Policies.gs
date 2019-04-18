@@ -59,4 +59,13 @@ class Policies {
 
     versions.add(newPolicy)
   }
+
+  static function PrintSpecificList(scan : Scanner){
+    print("Выберите полис")
+    PrintList()
+    var policies = List.get(scan.nextInt())
+    for (policy in policies.Versions){
+      policy.Print()
+    }
+  }
 }

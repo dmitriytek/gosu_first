@@ -118,4 +118,50 @@ class Car {
       obj.Print()
     }
   }
+
+  static function Change(scan : Scanner){
+    print("Выберите автомобиль")
+    PrintList()
+    var car = List.get(scan.nextInt())
+
+    print("Выберите новые покрытия:")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        car.HasGlass = true
+        break
+      default:
+        car.HasGlass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        car.HasLights = true
+        break
+      default:
+        car.HasLights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        car.HasStealing = true
+        break
+      default:
+        car.HasStealing = false
+        break
+    }
+
+    for (policies in Policies.List){
+      if (policies.Versions.last().Car == car){
+        var newPolicy = new Policy(policies.Versions.last(), car)
+        policies.Versions.add(newPolicy)
+      }
+    }
+
+  }
 }

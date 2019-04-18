@@ -18,7 +18,7 @@ class EditionMenu {
           Policies.ChangeCar(scan)
           break
         case "2":
-          Employee.PrintList()
+          Car.Change(scan)
           break
         case "0":
           return;
