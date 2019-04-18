@@ -40,6 +40,15 @@ class Car {
     _hasStealing = st
     _count++;
   }
+  construct(car : Car, id : int){
+    _id = id
+    _manufacturer = car.Manufacturer
+    _vin = car.Vin
+    _volume = car.Volume
+    _hasGlass = car.HasGlass
+    _hasLights = car.HasLights
+    _hasStealing = car.HasStealing
+  }
 
   property get Count() : long{
     return _count
@@ -108,9 +117,10 @@ class Car {
     print("Vin: " + _vin)
     print("Марка: " + _manufacturer)
     print("Объем двигателя: " + _volume + "л.")
-    if (_policy != null){
-
-    }
+    print("Покрытия")
+    if (_hasGlass) print("\t Стекло")
+    if (_hasLights) print("\t Фары")
+    if (_hasStealing) print("\t Угон")
   }
 
   static function PrintList(){

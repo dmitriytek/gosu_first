@@ -7,7 +7,7 @@ class Policy {
 
   var _id : long as readonly Id
   var _created : Date as readonly StartDate
-  var _price : double as readonly Price
+  //var _price : double as readonly Price
 
   var _owner : Person as readonly Owner
 
@@ -16,18 +16,18 @@ class Policy {
 
   construct(car : Car, person : Person){
     _id = _count
-    _price = 0
-    if (car.HasGlass){
-      _price += (50 * car.Volume)
-    }
-    if (car.HasLights){
-      _price += (100 * car.Volume)
-    }
-    if (car.HasStealing){
-      _price += (150 * car.Volume)
-    }
+//    _price = 0
+//    if (car.HasGlass){
+//      _price += (50 * car.Volume)
+//    }
+//    if (car.HasLights){
+//      _price += (100 * car.Volume)
+//    }
+//    if (car.HasStealing){
+//      _price += (150 * car.Volume)
+//    }
     _owner = person
-    _cars.add(car)
+    _cars.add(new Car(car, _cars.size()))
     _created = Date.Now
     //car.Policy = this
     _list.add(this)
@@ -36,19 +36,19 @@ class Policy {
 
   construct(policy : Policy, car : Car){
     _id = _count
-    _price = 0
-    if (car.HasGlass){
-      _price += (50 * car.Volume)
-    }
-    if (car.HasLights){
-      _price += (100 * car.Volume)
-    }
-    if (car.HasStealing){
-      _price += (150 * car.Volume)
-    }
+//    _price = 0
+//    if (car.HasGlass){
+//      _price += (50 * car.Volume)
+//    }
+//    if (car.HasLights){
+//      _price += (100 * car.Volume)
+//    }
+//    if (car.HasStealing){
+//      _price += (150 * car.Volume)
+//    }
     _owner = policy.Owner
     _cars.clear()
-    _cars.add(car)
+    _cars.add(new Car(car, _cars.size()))
     _created = Date.Now
     _list.add(this)
     _count++;
@@ -56,18 +56,18 @@ class Policy {
 
   construct(policy : Policy, cars : List<Car>){
     _id = _count
-    _price = 0
-    for (car in cars){
-      if (car.HasGlass){
-        _price += (50 * car.Volume)
-      }
-      if (car.HasLights){
-        _price += (100 * car.Volume)
-      }
-      if (car.HasStealing){
-        _price += (150 * car.Volume)
-      }
-    }
+//    _price = 0
+//    for (car in cars){
+//      if (car.HasGlass){
+//        _price += (50 * car.Volume)
+//      }
+//      if (car.HasLights){
+//        _price += (100 * car.Volume)
+//      }
+//      if (car.HasStealing){
+//        _price += (150 * car.Volume)
+//      }
+//    }
     _owner = policy.Owner
     _cars.clear()
     _cars.addAll(cars)
@@ -86,13 +86,17 @@ class Policy {
     List.add(policy)
 
     print("id: " + policy.Id)
-    print("Стоимость: " + policy.Price)
+    //print("Стоимость: " + policy.Price)
   }
 
   function Print(){
     print("id: " + _id)
     print("Дата выдачи: " + _created)
-    print("Стоимость: " + _price)
+    print("Автомобили:")
+    for (car in _cars){
+      car.Print()
+    }
+    //print("Стоимость: " + _price)
   }
 
   static function PrintList(){

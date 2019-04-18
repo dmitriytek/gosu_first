@@ -29,13 +29,13 @@ class Policies {
     //List.add(policy)
 
     print("id: " + policy.Id)
-    print("Стоимость: " + policy.Versions.get(0).Price)
+    //("Стоимость: " + policy.Versions.get(0).Price)
   }
 
   function Print(){
     print("id: " + _id)
     print("Владелец: " + _owner.Name)
-    print("Стоимость: " + _versions.last().Price)
+    //print("Стоимость: " + _versions.last().Price)
   }
 
   static function PrintList(){
@@ -72,7 +72,7 @@ class Policies {
     print("Выберите автомобиль")
     Car.PrintList()
     var cars = policy.Cars.copy()
-    cars.add(Car.List.get(scan.nextInt()))
+    cars.add(new Car(Car.List.get(scan.nextInt()), policy.Cars.size()))
 
     var newPolicy = new Policy(policy, cars)
     this.Versions.add(newPolicy)
@@ -83,7 +83,7 @@ class Policies {
     print("Выберите автомобиль")
     policy.PrintCars()
     var cars = policy.Cars.copy()
-    cars.remove(Car.List.get(scan.nextInt()))
+    cars.remove(scan.nextInt())
 
     var newPolicy = new Policy(policy, cars)
     this.Versions.add(newPolicy)

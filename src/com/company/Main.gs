@@ -88,6 +88,7 @@ class Main {
     var scan = new Scanner(System.in)
     var generalMenu = new GeneralMenu()
     generalMenu.Start(scan)
+
   }
 
 }
