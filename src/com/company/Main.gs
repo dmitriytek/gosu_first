@@ -1,6 +1,7 @@
 package com.company
 
 uses com.company.Entities.*
+uses com.company.Menus.*
 
 
 class Main {
@@ -85,120 +86,9 @@ class Main {
     ////////////////////////////////////////////
 
     var scan = new Scanner(System.in)
+    var generalMenu = new GeneralMenu()
+    generalMenu.Start(scan)
 
-    while (true){
-      print("Выберите действие:")
-//      print("1. Создать новый контакт")
-//      print("2. Создать нового работника")
-//      print("3. Создать новую рабочую группу")
-//      print("4. Создать новый автомобиль")
-//      print("5. Создать новый полис")
-//      print("6. Создать новую задачу")
-
-
-      print("1. Создание")
-      print("2. Просмотр")
-      print("0. Выход")
-      var s = scan.next()
-
-      switch (s){
-        case "1":
-          print("")
-          CreationMenu(scan)
-          break
-        case "2":
-          print("")
-          ReadMenu(scan)
-          break
-        case "0":
-          return;
-        default:
-          continue
-      }
-
-    }
-
-  }
-
-  static function CreationMenu(scan : Scanner){
-    while (true){
-
-      print("Выберите действие:")
-      print("1. Создать новый контакт")
-      print("2. Создать нового сотрудника")
-      print("3. Создать новую рабочую группу")
-      print("4. Создать новый автомобиль")
-      print("5. Создать новый полис")
-      print("6. Создать новую задачу")
-      print("0. Вернуться")
-
-      var s = scan.next()
-
-      switch (s){
-        case "1":
-          Person.Create(scan)
-          break
-        case "2":
-          Employee.Create(scan)
-          break
-        case "3":
-          Group.Create(scan)
-          break
-        case "4":
-          Car.Create(scan)
-          break
-        case "5":
-          Policies.Create(scan)
-          break
-        case "6":
-          Task.Create(scan)
-          break
-        case "0":
-          return;
-        default:
-          continue
-      }
-    }
-  }
-
-  static function ReadMenu(scan : Scanner){
-    while (true){
-      print("Выберите действие:")
-      print("1. Вывести все контакты")
-      print("2. Вывести всех сотрудников")
-      print("3. Вывести все группы")
-      print("4. Вывести все авто")
-      print("5. Вывести все полисы")
-      print("6. Вывести все задачи")
-      print("0. Вернуться")
-
-      var s = scan.next()
-
-      switch (s){
-        case "1":
-          Person.PrintList()
-          break
-        case "2":
-          Employee.PrintList()
-          break
-        case "3":
-          Group.PrintList()
-          break
-        case "4":
-          Car.PrintList()
-          break
-        case "5":
-          Policy.PrintList()
-          break
-        case "6":
-          Task.PrintList()
-          break
-        case "0":
-          return;
-        default:
-          continue
-      }
-    }
   }
 
 }
