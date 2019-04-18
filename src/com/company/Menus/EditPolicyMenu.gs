@@ -1,6 +1,5 @@
 package com.company.Menus
 
-uses com.company.Entities.Car
 uses com.company.Entities.Policies
 
 class EditPolicyMenu {

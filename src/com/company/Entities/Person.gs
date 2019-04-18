@@ -1,6 +1,9 @@
 package com.company.Entities
 
 uses com.company.Enum.Category
+uses java.io.BufferedReader
+uses java.io.InputStreamReader
+uses java.text.SimpleDateFormat
 
 class Person {
   static var _count : long = 0
@@ -9,11 +12,13 @@ class Person {
   var _id : long
   var _name : String as Name
   var _cat : Category as Category
+  var _birthday : Date as readonly Birthday
 
   var _car : Car as Car
 
-  construct(){
+  construct(birthday : Date){
     _id = _count
+    _birthday = birthday
     _count++;
   }
 
@@ -27,6 +32,7 @@ class Person {
   function Print(){
     print("id: " + _id)
     print("Имя: " + _name)
+    print("Дата рождения: " + _birthday)
     if(_cat == null){
       print("Прав нет")
     }else {
@@ -42,9 +48,14 @@ class Person {
   }
 
   static function Create(scan : Scanner){
-    var person = new Person()
     print("Введите имя")
-    person.Name = scan.next()
+    var name = scan.next()
+    //person.Name = scan.next()
+    print("Ведите дату рождения (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var person = new Person(dateFormat.parse(br.readLine()))
+    person.Name = name
     print("Выберите категорию водительских прав: ")
     print("1. A")
     print("2. B")
