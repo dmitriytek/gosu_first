@@ -31,7 +31,7 @@ class ReadMenu {
           Car.PrintList()
           break
         case "5":
-          Policy.PrintList()
+          Policies.PrintList()
           break
         case "6":
           Task.PrintList()

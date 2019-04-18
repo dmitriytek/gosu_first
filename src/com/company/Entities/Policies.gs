@@ -14,7 +14,8 @@ class Policies {
     _id = _count
     var policy = new Policy(car, person)
     _versions.add(policy)
-    _list.add(this)
+    _owner = person
+    List.add(this)
     _count++;
   }
 
@@ -41,5 +42,21 @@ class Policies {
     for (obj in List){
       obj.Print()
     }
+  }
+
+  static function ChangeCar(scan : Scanner){
+    print("Выберите полис")
+    Policies.PrintList()
+    var versions = List.get(scan.nextInt()).Versions
+    var policy = versions.last()
+    policy.Print()
+
+    print("Выберите новый автомобиль")
+    Car.PrintList()
+    var car  = Car.List.get(scan.nextInt())
+
+    var newPolicy = new Policy(policy, car)
+
+    versions.add(newPolicy)
   }
 }

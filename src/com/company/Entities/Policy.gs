@@ -11,6 +11,8 @@ class Policy {
 
   var _owner : Person as readonly Owner
 
+  var _car : Car as readonly Car
+
 
   construct(car : Car, person : Person){
     _id = _count
@@ -25,8 +27,28 @@ class Policy {
       _price += (150 * car.Volume)
     }
     _owner = person
+    _car = car
     _created = Date.Now
-    car.Policy = this
+    //car.Policy = this
+    _list.add(this)
+    _count++;
+  }
+
+  construct(policy : Policy, car : Car){
+    _id = _count
+    _price = 0
+    if (car.HasGlass){
+      _price += (50 * car.Volume)
+    }
+    if (car.HasLights){
+      _price += (100 * car.Volume)
+    }
+    if (car.HasStealing){
+      _price += (150 * car.Volume)
+    }
+    _owner = policy.Owner
+    _car = car
+    _created = Date.Now
     _list.add(this)
     _count++;
   }

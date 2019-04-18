@@ -7,6 +7,7 @@ class GeneralMenu {
       print("Выберите действие:")
       print("1. Создание")
       print("2. Просмотр")
+      print("3. Изменение")
       print("0. Выход")
       var s = scan.next()
 
@@ -19,6 +20,11 @@ class GeneralMenu {
         case "2":
           print("")
           var menu = new ReadMenu()
+          menu.Start(scan)
+          break
+        case "3":
+          print("")
+          var menu = new EditionMenu()
           menu.Start(scan)
           break
         case "0":
