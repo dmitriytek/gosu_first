@@ -1,5 +1,9 @@
 package com.company.Entities
 
+uses java.io.BufferedReader
+uses java.io.InputStreamReader
+uses java.text.SimpleDateFormat
+
 class Policies {
 
   static var _count : long = 0
@@ -10,9 +14,9 @@ class Policies {
 
   var _owner : Person as readonly Owner
 
-  construct(car : Car, person : Person){
+  construct(car : Car, person : Person, date : Date){
     _id = _count
-    var policy = new Policy(car, person)
+    var policy = new Policy(car, person, date)
     _versions.add(policy)
     _owner = person
     List.add(this)
@@ -25,7 +29,13 @@ class Policies {
     var owner = Person.List.get(scan.nextInt())
     print("Выберите автомобиль")
     Car.PrintList()
-    var policy = new Policies(Car.List.get(scan.nextInt()), owner)
+    var car = Car.List.get(scan.nextInt())
+
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+
+    var policy = new Policies(car, owner, dateFormat.parse(br.readLine()))
     //List.add(policy)
 
     print("id: " + policy.Id)
@@ -53,7 +63,16 @@ class Policies {
     Car.PrintList()
     var car  = Car.List.get(scan.nextInt())
 
-    var newPolicy = new Policy(policy, car)
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var startDate = dateFormat.parse(br.readLine())
+
+    for (version in Versions.where(\elt -> elt.StartDate > startDate)){
+      Versions.remove(version)
+    }
+
+    var newPolicy = new Policy(policy, car, startDate)
 
     versions.add(newPolicy)
   }
@@ -72,9 +91,19 @@ class Policies {
     print("Выберите автомобиль")
     Car.PrintList()
     var cars = policy.Cars.copy()
-    cars.add(new Car(Car.List.get(scan.nextInt()), policy.Cars.size()))
+    var carCopy = new Car(Car.List.get(scan.nextInt()), policy.Cars.size())
+    cars.add(carCopy)
 
-    var newPolicy = new Policy(policy, cars)
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var startDate = dateFormat.parse(br.readLine())
+
+    for (version in Versions.where(\elt -> elt.StartDate > startDate)){
+      version.Cars.add(carCopy)
+    }
+
+    var newPolicy = new Policy(policy, cars, startDate)
     this.Versions.add(newPolicy)
   }
 
@@ -83,9 +112,22 @@ class Policies {
     print("Выберите автомобиль")
     policy.PrintCars()
     var cars = policy.Cars.copy()
-    cars.remove(scan.nextInt())
+    var remCar = cars.get(scan.nextInt())
+    cars.remove(remCar)
 
-    var newPolicy = new Policy(policy, cars)
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var startDate = dateFormat.parse(br.readLine())
+
+    for (version in Versions.where(\elt -> elt.StartDate > startDate)){
+      version.Cars.remove(remCar)
+      if (version.Cars.size() < 1){
+        Versions.remove(version)
+      }
+    }
+
+    var newPolicy = new Policy(policy, cars, startDate)
     this.Versions.add(newPolicy)
   }
 }

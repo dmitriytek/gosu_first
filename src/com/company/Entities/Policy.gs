@@ -1,12 +1,17 @@
 package com.company.Entities
 
+uses java.io.BufferedReader
+uses java.io.InputStreamReader
+uses java.text.SimpleDateFormat
+
 class Policy {
 
   static var _count : long = 0
   static var _list : List<Policy> as List = {}
 
   var _id : long as readonly Id
-  var _created : Date as readonly StartDate
+  var _created : Date as readonly Created
+  var _startDate : Date as readonly StartDate
   //var _price : double as readonly Price
 
   var _owner : Person as readonly Owner
@@ -14,63 +19,33 @@ class Policy {
   var _cars : List<Car> as readonly Cars = {}
 
 
-  construct(car : Car, person : Person){
+  construct(car : Car, person : Person, date : Date){
     _id = _count
-//    _price = 0
-//    if (car.HasGlass){
-//      _price += (50 * car.Volume)
-//    }
-//    if (car.HasLights){
-//      _price += (100 * car.Volume)
-//    }
-//    if (car.HasStealing){
-//      _price += (150 * car.Volume)
-//    }
     _owner = person
     _cars.add(new Car(car, _cars.size()))
+    _startDate = date
     _created = Date.Now
-    //car.Policy = this
     _list.add(this)
     _count++;
   }
 
-  construct(policy : Policy, car : Car){
+  construct(policy : Policy, car : Car, date : Date){
     _id = _count
-//    _price = 0
-//    if (car.HasGlass){
-//      _price += (50 * car.Volume)
-//    }
-//    if (car.HasLights){
-//      _price += (100 * car.Volume)
-//    }
-//    if (car.HasStealing){
-//      _price += (150 * car.Volume)
-//    }
     _owner = policy.Owner
     _cars.clear()
     _cars.add(new Car(car, _cars.size()))
+    _startDate = date
     _created = Date.Now
     _list.add(this)
     _count++;
   }
 
-  construct(policy : Policy, cars : List<Car>){
+  construct(policy : Policy, cars : List<Car>, date : Date){
     _id = _count
-//    _price = 0
-//    for (car in cars){
-//      if (car.HasGlass){
-//        _price += (50 * car.Volume)
-//      }
-//      if (car.HasLights){
-//        _price += (100 * car.Volume)
-//      }
-//      if (car.HasStealing){
-//        _price += (150 * car.Volume)
-//      }
-//    }
     _owner = policy.Owner
     _cars.clear()
     _cars.addAll(cars)
+    _startDate = date
     _created = Date.Now
     _list.add(this)
     _count++;
@@ -82,21 +57,38 @@ class Policy {
     var owner = Person.List.get(scan.nextInt())
     print("Выберите автомобиль")
     Car.PrintList()
-    var policy = new Policy(Car.List.get(scan.nextInt()), owner)
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var policy = new Policy(Car.List.get(scan.nextInt()), owner, dateFormat.parse(br.readLine()))
     List.add(policy)
 
     print("id: " + policy.Id)
-    //print("Стоимость: " + policy.Price)
+    print("Полис: ")
+    policy.Print()
   }
 
   function Print(){
     print("id: " + _id)
-    print("Дата выдачи: " + _created)
+    print("Дата создания: " + _created)
+    print("Дата вступления в силу: " + _startDate)
     print("Автомобили:")
     for (car in _cars){
       car.Print()
     }
-    //print("Стоимость: " + _price)
+    var price : double = 0
+    for (car in _cars){
+      if (car.HasGlass){
+        price += (50 * car.Volume)
+      }
+      if (car.HasLights){
+        price += (100 * car.Volume)
+      }
+      if (car.HasStealing){
+        price += (150 * car.Volume)
+      }
+    }
+    print("Стоимость: " + price)
   }
 
   static function PrintList(){
