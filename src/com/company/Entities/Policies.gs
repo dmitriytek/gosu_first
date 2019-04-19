@@ -14,9 +14,13 @@ class Policies {
 
   var _owner : Person as readonly Owner
 
-  construct(car : Car, person : Person, date : Date){
+  construct(
+      person : Person,
+      date : Date,
+      coverage : Coverage
+  ){
     _id = _count
-    var policy = new Policy(car, person, date)
+    var policy = new Policy(person, date, coverage)
     _versions.add(policy)
     _owner = person
     List.add(this)
@@ -31,12 +35,44 @@ class Policies {
     Car.PrintList()
     var car = Car.List.get(scan.nextInt())
 
+    print("Выберите покрытия")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        glass = true
+        break
+      default:
+        glass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        lights = true
+        break
+      default:
+        lights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        st = true
+        break
+      default:
+        st = false
+        break
+    }
+
     print("Введите дату вступления в силу (dd.MM.yyyy)")
     var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
     var br = new BufferedReader(new InputStreamReader(System.in))
 
-    var policy = new Policies(car, owner, dateFormat.parse(br.readLine()))
-    //List.add(policy)
+    var coverage = new Coverage(car, glass, lights, st)
+    var policy = new Policies(owner, dateFormat.parse(br.readLine()), coverage)
 
     print("id: " + policy.Id)
     //("Стоимость: " + policy.Versions.get(0).Price)
@@ -63,6 +99,38 @@ class Policies {
     Car.PrintList()
     var car  = Car.List.get(scan.nextInt())
 
+    print("Выберите покрытия")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        glass = true
+        break
+      default:
+        glass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        lights = true
+        break
+      default:
+        lights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        st = true
+        break
+      default:
+        st = false
+        break
+    }
+
     print("Введите дату вступления в силу (dd.MM.yyyy)")
     var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
     var br = new BufferedReader(new InputStreamReader(System.in))
@@ -72,7 +140,8 @@ class Policies {
       Versions.remove(version)
     }
 
-    var newPolicy = new Policy(policy, car, startDate)
+    var coverage = new Coverage(car, glass, lights, st)
+    var newPolicy = new Policy(policy, startDate, coverage)
 
     versions.add(newPolicy)
   }
@@ -87,33 +156,80 @@ class Policies {
   }
 
   function AddCar(scan : Scanner){
-    var policy = this.Versions.last()
     print("Выберите автомобиль")
     Car.PrintList()
-    var cars = policy.Cars.copy()
-    var carCopy = new Car(Car.List.get(scan.nextInt()), policy.Cars.size())
-    cars.add(carCopy)
+    var car = Car.List.get(scan.nextInt())
+
+    print("Выберите покрытия")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        glass = true
+        break
+      default:
+        glass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        lights = true
+        break
+      default:
+        lights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        st = true
+        break
+      default:
+        st = false
+        break
+    }
+
+    var coverage = new Coverage(car, glass, lights, st)
 
     print("Введите дату вступления в силу (dd.MM.yyyy)")
     var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
     var br = new BufferedReader(new InputStreamReader(System.in))
     var startDate = dateFormat.parse(br.readLine())
 
-    for (version in Versions.where(\elt -> elt.StartDate > startDate)){
-      version.Cars.add(carCopy)
+
+    var policy = this.Versions.sortBy(\elt -> elt.StartDate).last()
+    if (this.Versions.hasMatch(\elt -> elt.StartDate < startDate)){
+      policy = this.Versions.sortBy(\elt -> elt.StartDate).lastWhere(\elt -> elt.StartDate < startDate)
+      print("YEP")
     }
 
-    var newPolicy = new Policy(policy, cars, startDate)
+    policy.Print()
+
+    var coverages : List<Coverage> = {}
+    for (cover in policy.Coverages){
+      var newCover = new Coverage(cover)
+      coverages.add(newCover)
+    }
+    coverages.add(coverage)
+
+    for (version in Versions.where(\elt -> elt.StartDate > startDate)){
+      version.Coverages.add(coverage)
+    }
+
+    var newPolicy = new Policy(policy, startDate, coverages)
     this.Versions.add(newPolicy)
   }
 
   function RemoveCar(scan : Scanner){
     var policy = this.Versions.last()
     print("Выберите автомобиль")
-    policy.PrintCars()
-    var cars = policy.Cars.copy()
-    var remCar = cars.get(scan.nextInt())
-    cars.remove(remCar)
+    policy.PrintCoverages()
+    var coverages = policy.Coverages.copy()
+    var remCar = coverages.get(scan.nextInt())
+    coverages.remove(remCar)
 
     print("Введите дату вступления в силу (dd.MM.yyyy)")
     var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
@@ -121,13 +237,13 @@ class Policies {
     var startDate = dateFormat.parse(br.readLine())
 
     for (version in Versions.where(\elt -> elt.StartDate > startDate)){
-      version.Cars.remove(remCar)
-      if (version.Cars.size() < 1){
+      version.Coverages.remove(remCar)
+      if (version.Coverages.size() < 1){
         Versions.remove(version)
       }
     }
 
-    var newPolicy = new Policy(policy, cars, startDate)
+    var newPolicy = new Policy(policy, startDate, coverages)
     this.Versions.add(newPolicy)
   }
 }

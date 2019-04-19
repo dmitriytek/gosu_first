@@ -13,11 +13,11 @@ class EditPolicyMenu {
   function Start(scan : Scanner){
     while (true){
       print("Выберите действие:")
-      if (_policies.Versions.last().Cars.size() == 1) {
+      if (_policies.Versions.last().Coverages.size() == 1) {
         print("1. Изменить автомобиль")
       }
       print("2. Добавить автомобиль")
-      if (_policies.Versions.last().Cars.size() > 1) {
+      if (_policies.Versions.last().Coverages.size() > 1) {
         print("3. Удалить автомобиль")
       }
       print("0. Вернуться")
