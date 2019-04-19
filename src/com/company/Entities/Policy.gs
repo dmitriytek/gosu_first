@@ -118,15 +118,7 @@ class Policy {
     }
     var price : double = 0
     for (coverage in Coverages){
-      if (coverage.HasGlass){
-        price += (50 * coverage.Car.Volume)
-      }
-      if (coverage.HasLights){
-        price += (100 * coverage.Car.Volume)
-      }
-      if (coverage.HasStealing){
-        price += (150 * coverage.Car.Volume)
-      }
+      price+=coverage.Price()
     }
     print("Стоимость: " + price)
   }

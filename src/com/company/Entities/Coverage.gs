@@ -38,4 +38,18 @@ class Coverage {
     if (_hasStealing) print("\t Угон")
   }
 
+  function Price() : double{
+    var price : double = 0
+    if (_hasGlass){
+      price += (50 * _car.Volume)
+    }
+    if (_hasLights){
+      price += (100 * _car.Volume)
+    }
+    if (_hasStealing){
+      price += (150 * _car.Volume)
+    }
+    return price
+  }
+
 }

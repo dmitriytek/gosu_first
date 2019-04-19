@@ -20,6 +20,7 @@ class EditPolicyMenu {
       if (_policies.Versions.last().Coverages.size() > 1) {
         print("3. Удалить автомобиль")
       }
+      print("4. Изменить покрытия")
       print("0. Вернуться")
 
       var s = scan.next()
@@ -33,6 +34,9 @@ class EditPolicyMenu {
           break
         case "3":
           _policies.RemoveCar(scan)
+          break
+        case "4":
+          _policies.ChangeCoverage(scan)
           break
         case "0":
           return;

@@ -75,13 +75,17 @@ class Policies {
     var policy = new Policies(owner, dateFormat.parse(br.readLine()), coverage)
 
     print("id: " + policy.Id)
-    //("Стоимость: " + policy.Versions.get(0).Price)
+    print("Стоимость: " + coverage.Price())
   }
 
   function Print(){
     print("id: " + _id)
     print("Владелец: " + _owner.Name)
-    //print("Стоимость: " + _versions.last().Price)
+    var price : double = 0
+    for (cover in _versions.sortBy(\elt -> elt.StartDate).lastWhere(\elt -> elt.StartDate < Date.Now).Coverages){
+      price+=cover.Price()
+    }
+    print("Стоимость: " + price)
   }
 
   static function PrintList(){
@@ -144,13 +148,17 @@ class Policies {
     var newPolicy = new Policy(policy, startDate, coverage)
 
     versions.add(newPolicy)
+
+    print("------------------------")
+    newPolicy.Print()
   }
 
   static function PrintSpecificList(scan : Scanner){
     print("Выберите полис")
     PrintList()
     var policies = List.get(scan.nextInt())
-    for (policy in policies.Versions){
+    for (policy in policies.Versions.sortBy(\elt -> elt.StartDate)){
+      print("----------------------------")
       policy.Print()
     }
   }
@@ -203,10 +211,9 @@ class Policies {
     var policy = this.Versions.sortBy(\elt -> elt.StartDate).last()
     if (this.Versions.hasMatch(\elt -> elt.StartDate < startDate)){
       policy = this.Versions.sortBy(\elt -> elt.StartDate).lastWhere(\elt -> elt.StartDate < startDate)
-      print("YEP")
     }
 
-    policy.Print()
+    //policy.Print()
 
     var coverages : List<Coverage> = {}
     for (cover in policy.Coverages){
@@ -221,6 +228,9 @@ class Policies {
 
     var newPolicy = new Policy(policy, startDate, coverages)
     this.Versions.add(newPolicy)
+
+    print("-------------------------------")
+    newPolicy.Print()
   }
 
   function RemoveCar(scan : Scanner){
@@ -245,5 +255,85 @@ class Policies {
 
     var newPolicy = new Policy(policy, startDate, coverages)
     this.Versions.add(newPolicy)
+
+    print("-------------------------------")
+    newPolicy.Print()
+  }
+
+  function ChangeCoverage(scan : Scanner){
+    print("Введите дату вступления в силу (dd.MM.yyyy)")
+    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var br = new BufferedReader(new InputStreamReader(System.in))
+    var startDate = dateFormat.parse(br.readLine())
+
+    var policy = Versions.sortBy(\elt -> elt.StartDate).lastWhere(\elt -> elt.StartDate < startDate)
+
+    policy.Coverages.each(\elt -> elt.Print())
+    var recCoverage = policy.Coverages.get(scan.nextInt())
+    var car = recCoverage.Car
+
+    var coverages : List<Coverage> = {}
+    for (cover in policy.Coverages){
+      if (cover.Car != car){
+        var newCover = new Coverage(cover)
+        coverages.add(newCover)
+      }
+    }
+
+    print("Выберите покрытия")
+    print("Стекло (y|n)")
+    var glass : boolean
+    switch (scan.next()){
+      case "y":
+        glass = true
+        break
+      default:
+        glass = false
+        break
+    }
+    print("Фары (y|n)")
+    var lights : boolean
+    switch (scan.next()){
+      case "y":
+        lights = true
+        break
+      default:
+        lights = false
+        break
+    }
+    print("Угон (y|n)")
+    var st : boolean
+    switch (scan.next()){
+      case "y":
+        st = true
+        break
+      default:
+        st = false
+        break
+    }
+
+    var coverage = new Coverage(car, glass, lights, st)
+    coverages.add(coverage)
+
+    for (version in Versions.sortBy(\elt -> elt.StartDate).where(\elt -> elt.StartDate > startDate)) {
+      var next = version.Coverages.firstWhere(\elt -> elt.Car == car)
+      if (recCoverage != coverage) {
+        if ((next.HasGlass != recCoverage.HasGlass) and (next.HasGlass != coverage.HasGlass) and (next.HasGlass != true)) {
+          next.HasGlass = coverage.HasGlass
+        }
+        if ((next.HasLights != recCoverage.HasLights) and (next.HasLights != coverage.HasLights) and (next.HasLights != true)) {
+          next.HasLights = coverage.HasLights
+        }
+        if ((next.HasStealing != recCoverage.HasStealing) and (next.HasStealing != coverage.HasStealing) and (next.HasStealing != true)) {
+          next.HasStealing = coverage.HasStealing
+        }
+      }
+    }
+
+    var newPolicy = new Policy(policy, startDate, coverages)
+    this.Versions.add(newPolicy)
+
+    print("-------------------------------")
+    newPolicy.Print()
   }
 }

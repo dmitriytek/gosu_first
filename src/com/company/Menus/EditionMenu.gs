@@ -8,7 +8,7 @@ class EditionMenu {
     while (true){
       print("Выберите действие:")
       print("1. Изменить полис")
-      print("2. Изменить покрытия автомобиля")
+      //print("2. Изменить покрытия автомобиля")
       print("0. Вернуться")
 
       var s = scan.next()
@@ -22,7 +22,7 @@ class EditionMenu {
           //Policies.ChangeCar(scan)
           break
         case "2":
-          Car.Change(scan)
+          //Car.Change(scan)
           break
         case "0":
           return;
