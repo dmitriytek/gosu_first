@@ -3,36 +3,36 @@ package com.company.Menus
 uses com.company.Entities.*
 uses com.company.Controller.*
 
-class PersonMenu {
+class GroupMenu {
 
   function Start(scan : Scanner){
     while (true) {
       print("")
-      print("Меню управления контактами")
-      print("Всего контактов: " + Person.List.size())
+      print("Меню управления группами")
+      print("Количество групп: " + Group.List.size())
       print("Выберите действие")
       print("----------------------------")
-      print("1. Создать контакт")
-      print("2. Удалить контакт")
-      print("3. Изменить контакт")
-      print("4. Вывести список контактов")
+      print("1. Создать группу")
+      print("2. Удалить группу")
+      print("3. Изменить группу")
+      print("4. Вывести список групп")
       print("0. Вернуться в главное меню")
 
       switch (scan.next()){
         case "1":
           print("")
-          PersonController.Create(scan)
+          GroupController.Create(scan)
           break
         case "2":
           print("")
-          PersonController.Delete(scan)
+          GroupController.Delete(scan)
           break
         case "3":
           print("")
           break
         case "4":
           print("")
-          PersonController.GetList()
+          GroupController.GetList()
           break
         case "0":
           return;

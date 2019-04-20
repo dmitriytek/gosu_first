@@ -10,42 +10,31 @@ class EmployeeMenu {
       print("Количество групп: " + Group.List.size())
       print("Количество сотрудников: " + Employee.List.where(\elt -> elt.getClass() == Employee).size())
       print("Количество задач: " + Task.List.size())
-      print("Выберите действия")
-      print("1. Создать группу")
-      print("2. Удалить группу")
-      print("3. Изменить группу")
-      print("4. Вывести список групп")
-      print("5. Создать сотрудника")
-      print("6. Удалить сотрудника")
-      print("7. Изменить сотрудника")
-      print("8. Вывести список сотрудников")
-      print("9. Создать задачу")
-      print("10. Удалить задачу")
-      print("11. Вывести список задач")
+      print("----------------------------")
+      print("Выберите действие")
+      print("1. Создать сотрудника")
+      print("2. Удалить сотрудника")
+      print("3. Изменить сотрудника")
+      print("4. Перейти в меню управления группами")
+      print("5. Перейти в меню управления задачами")
       print("0. Вернуться в главное меню")
 
       switch (scan.next()){
         case "1":
+          print("")
           break
         case "2":
+          print("")
           break
         case "3":
+          print("")
           break
         case "4":
+          var menu = new GroupMenu()
+          menu.Start(scan)
           break
         case "5":
-          break
-        case "6":
-          break
-        case "7":
-          break
-        case "8":
-          break
-        case "9":
-          break
-        case "10":
-          break
-        case "11":
+          print("")
           break
         case "0":
           return;

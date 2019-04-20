@@ -2,35 +2,23 @@ package com.company.Entities
 
 class Group {
 
-  static var _count : long = 0
+  static var _count : long as readonly Count = 0
   static var _list : List<Group> as List = {}
 
-  var _id : long
+  var _id : long as readonly Id
   var _name : String as Name
 
-  construct(){
+  construct(name : String){
     _id = _count
+    _name = name
     _count++;
   }
 
-  property get Count() : long{
-    return _count
-  }
-  property get Id() : long{
-    return _id
-  }
-
-  static function Create(scan : Scanner){
-    var group = new Group()
-    print("Ведите название группы")
-    group.Name = scan.next()
-    print("id: " + group.Id)
-    List.add(group)
-  }
-
   function Print(){
+    print("------------------------")
     print("id: " + _id)
     print("Название: " + _name)
+    print("Сотрудников: " + Employee.List.where(\elt -> elt.getClass() == Employee).where(\elt -> (elt as Employee).Group == this))
   }
 
   static function PrintList(){

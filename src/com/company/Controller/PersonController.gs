@@ -10,7 +10,6 @@ uses java.text.SimpleDateFormat
 class PersonController {
 
   static function Create(scan : Scanner){
-    print("")
     print("Введите имя")
     var name = scan.next()
     print("Ведите дату рождения (dd.MM.yyyy)")
@@ -45,7 +44,6 @@ class PersonController {
   }
 
   static function Delete(scan : Scanner){
-    print("")
     print("Выберите контакт для удаления")
     var persons = Person.List.where(\elt -> elt.Class != Employee).copy()
     persons.each(\elt -> elt.Print())
@@ -62,7 +60,6 @@ class PersonController {
   }
 
   static function GetList(){
-    print("")
     Person.List.each(\elt -> elt.Print())
   }
 }

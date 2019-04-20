@@ -27,7 +27,7 @@ class CreationMenu {
           Employee.Create(scan)
           break
         case "3":
-          Group.Create(scan)
+          GroupController.Create(scan)
           break
         case "4":
           Car.Create(scan)
