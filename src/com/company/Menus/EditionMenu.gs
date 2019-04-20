@@ -19,7 +19,6 @@ class EditionMenu {
           Policies.PrintList()
           var menu = new EditPolicyMenu(Policies.List.get(scan.nextInt()))
           menu.Start(scan)
-          //Policies.ChangeCar(scan)
           break
         case "2":
           print("Выберите автомобиль")

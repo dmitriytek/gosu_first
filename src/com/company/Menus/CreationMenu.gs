@@ -1,6 +1,7 @@
 package com.company.Menus
 
 uses com.company.Entities.*
+uses com.company.Controller.*
 
 class CreationMenu {
 
@@ -20,7 +21,7 @@ class CreationMenu {
 
       switch (s){
         case "1":
-          Person.Create(scan)
+          PersonController.Create(scan)
           break
         case "2":
           Employee.Create(scan)
