@@ -5,26 +5,28 @@ class GeneralMenu {
   function Start(scan : Scanner){
     while (true){
       print("Выберите действие:")
-      print("1. Создание")
-      print("2. Просмотр")
-      print("3. Изменение")
+      print("1. Меню контактов")
+      print("2. Меню сотрудников")
+      print("3. Меню автомобилей")
+      print("4. Меню полисов")
       print("0. Выход")
       var s = scan.next()
 
       switch (s){
         case "1":
-          print("")
-          var menu = new CreationMenu()
+          var menu = new PersonMenu()
           menu.Start(scan)
           break
         case "2":
-          print("")
-          var menu = new ReadMenu()
+          var menu = new EmployeeMenu()
           menu.Start(scan)
           break
         case "3":
-          print("")
-          var menu = new EditionMenu()
+          var menu = new CarMenu()
+          menu.Start(scan)
+          break
+        case "4":
+          var menu = new PolicyMenu()
           menu.Start(scan)
           break
         case "0":
