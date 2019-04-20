@@ -31,7 +31,7 @@ class CarMenu {
         case "3":
           print("")
           print("Выберите автомобиль")
-          Car.PrintList()
+          Car.List.each(\elt -> elt.Print())
           var menu = new EditCarMenu(Car.List.get(scan.nextInt()))
           menu.Start(scan)
           break
