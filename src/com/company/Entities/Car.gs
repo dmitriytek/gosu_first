@@ -11,9 +11,10 @@ class Car {
   var _vin : String as Vin
   var _volume : double as Volume
 
-
   var _manufacturer : Manufacturer as readonly Manufacturer
   var _policy : Policies as Policies
+
+  var _drivers : List<Person> as Drivers = {}
 
   construct(
       vin : String,
@@ -59,37 +60,6 @@ class Car {
     var vol = scan.nextDouble()
     print("Введите vin")
     var vin = scan.next()
-//    print("Введите покрытия:")
-//    print("Стекло (y|n)")
-//    var glass : boolean
-//    switch (scan.next()){
-//      case "y":
-//        glass = true
-//        break
-//      default:
-//        glass = false
-//        break
-//    }
-//    print("Фары (y|n)")
-//    var lights : boolean
-//    switch (scan.next()){
-//      case "y":
-//        lights = true
-//        break
-//      default:
-//        lights = false
-//        break
-//    }
-//    print("Угон (y|n)")
-//    var st : boolean
-//    switch (scan.next()){
-//      case "y":
-//        st = true
-//        break
-//      default:
-//        st = false
-//        break
-//    }
     var car = new Car(vin, vol, man)
     print("id: " + car.Id)
     List.add(car)
@@ -101,9 +71,6 @@ class Car {
     print("Марка: " + _manufacturer)
     print("Объем двигателя: " + _volume + "л.")
     print("Покрытия")
-//    if (_hasGlass) print("\t Стекло")
-//    if (_hasLights) print("\t Фары")
-//    if (_hasStealing) print("\t Угон")
   }
 
   static function PrintList(){
@@ -112,49 +79,28 @@ class Car {
     }
   }
 
-  static function Change(scan : Scanner){
-//    print("Выберите автомобиль")
-//    PrintList()
-//    var car = List.get(scan.nextInt())
-//
-//    print("Выберите новые покрытия:")
-//    print("Стекло (y|n)")
-//    var glass : boolean
-//    switch (scan.next()){
-//      case "y":
-//        car.HasGlass = true
-//        break
-//      default:
-//        car.HasGlass = false
-//        break
-//    }
-//    print("Фары (y|n)")
-//    var lights : boolean
-//    switch (scan.next()){
-//      case "y":
-//        car.HasLights = true
-//        break
-//      default:
-//        car.HasLights = false
-//        break
-//    }
-//    print("Угон (y|n)")
-//    var st : boolean
-//    switch (scan.next()){
-//      case "y":
-//        car.HasStealing = true
-//        break
-//      default:
-//        car.HasStealing = false
-//        break
-//    }
-//
-//    for (policies in Policies.List){
-//      if (policies.Versions.last().Car == car){
-//        var newPolicy = new Policy(policies.Versions.last(), car)
-//        policies.Versions.add(newPolicy)
-//      }
-//    }
+  function AddDriver(scan : Scanner){
+    print("Выберите водителя")
+    var candidates : List<Person> = {}
+    for (person in Person.List.where(\elt -> elt.Category == A or elt.Category == B)){
+      if (!_drivers.contains(person)){
+        candidates.add(person)
+      }
+    }
+    if (!candidates.isEmpty()){
+      candidates.each(\elt -> elt.Print())
+      _drivers.add(candidates.get(scan.nextInt()))
 
+      print("Добавить еще? (y|n)")
+      switch (scan.next()){
+        case "y":
+          AddDriver(scan)
+          break
+        default:
+          return;
+      }
+    } else{
+      print("Нет кандидатов")
+    }
   }
 }
