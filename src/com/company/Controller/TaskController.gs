@@ -1,13 +1,12 @@
 package com.company.Controller
 
 uses com.company.Entities.*
-uses com.company.Enum.Category
 
 uses java.io.BufferedReader
 uses java.io.InputStreamReader
 uses java.text.SimpleDateFormat
 
-class EmployeeController {
+class TaskController {
 
   static function Create(scan : Scanner){
     if (Group.List.isEmpty()){
@@ -26,29 +25,17 @@ class EmployeeController {
         group = Group.List.get(Integer.parseInt(s))
         break
     }
-    print("Введите имя")
-    var name = scan.next()
-    print("Ведите дату рождения (dd.MM.yyyy)")
-    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
+    var task = new Task(group)
+    print("Введите описание задачи")
+    task.Description = scan.next()
+    print("Ведите дату завершения задачи")
+    var date_task = new SimpleDateFormat("dd.MM.yyyy hh:mm")
     var br = new BufferedReader(new InputStreamReader(System.in))
-    var emp = new Employee(dateFormat.parse(br.readLine()), group)
-    emp.Name = name
-    print("Выберите категорию водительских прав: ")
-    print("1. A")
-    print("2. B")
-    print("0 если нет прав")
-    var cat = scan.next()
-    switch (cat) {
-      case "1":
-        emp.Category = Category.A
-        break
-      case "2":
-        emp.Category = Category.B
-      default:
-        break
-    }
-    print("id: " + emp.Id)
-    Employee.List.add(emp)
+    var task_time = date_task.parse(br.readLine())
+    task.ReadyTime = task_time
+
+    print("id: " + task.Id)
+    Task.List.add(task)
 
     print("Создать ещё? (y|n)")
     switch (scan.next()){
@@ -61,10 +48,9 @@ class EmployeeController {
   }
 
   static function Delete(scan : Scanner){
-    print("Выберите сотрудника для удаления")
-    var elmployees = Employee.List.where(\elt -> elt.getClass() == Employee).copy() as List<Employee>
-    elmployees.each(\elt -> elt.Print())
-    Employee.List.remove(elmployees.get(scan.nextInt()))
+    print("Выберите задачу")
+    Task.List.each(\elt -> elt.Print())
+    Task.List.remove(scan.nextInt())
 
     print("Удалить ещё? (y|n)")
     switch (scan.next()){
@@ -77,7 +63,7 @@ class EmployeeController {
   }
 
   static function GetList(){
-    Employee.List.where(\elt -> elt.getClass() == Employee).each(\elt -> elt.Print())
+    Task.List.each(\elt -> elt.Print())
   }
 
 }

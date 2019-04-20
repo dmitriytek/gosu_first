@@ -20,10 +20,4 @@ class Group {
     print("Название: " + _name)
     print("Сотрудников: " + Employee.List.where(\elt -> elt.getClass() == Employee).where(\elt -> (elt as Employee).Group == this))
   }
-
-  static function PrintList(){
-    for (obj in List){
-      obj.Print()
-    }
-  }
 }

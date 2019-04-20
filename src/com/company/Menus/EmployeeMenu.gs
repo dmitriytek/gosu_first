@@ -42,7 +42,8 @@ class EmployeeMenu {
           menu.Start(scan)
           break
         case "6":
-          print("")
+          var menu = new TaskMenu()
+          menu.Start(scan)
           break
         case "0":
           return;
