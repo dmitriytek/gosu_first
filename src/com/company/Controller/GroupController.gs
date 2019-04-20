@@ -39,4 +39,17 @@ class GroupController {
     Group.List.each(\elt -> elt.Print())
   }
 
+  static function GetGroupEmployees(scan : Scanner){
+    print("Выберите группу")
+    Group.List.each(\elt -> elt.Print())
+    var employees = Employee.List.where(\elt -> elt.getClass() == Employee) as List<Employee>
+    employees.where(\elt -> elt.Group == Group.List.get(scan.nextInt())).each(\elt -> elt.Print())
+  }
+
+  static function GetGroupTasks(scan : Scanner){
+    print("Выберите группу")
+    Group.List.each(\elt -> elt.Print())
+    Task.List.where(\elt -> elt.Group == Group.List.get(scan.nextInt())).each(\elt -> elt.Print())
+  }
+
 }

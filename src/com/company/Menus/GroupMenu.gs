@@ -16,6 +16,8 @@ class GroupMenu {
       print("2. Удалить группу")
       print("3. Изменить группу")
       print("4. Вывести список групп")
+      print("5. Вывести список сотрудников конкретной группы")
+      print("6. Вывести список задач конкретной группы")
       print("0. Вернуться в главное меню")
 
       switch (scan.next()){
@@ -32,6 +34,16 @@ class GroupMenu {
           break
         case "4":
           print("")
+          GroupController.GetList()
+          break
+        case "5":
+          print("")
+          GroupController.GetGroupEmployees(scan)
+          GroupController.GetList()
+          break
+        case "6":
+          print("")
+          GroupController.GetGroupTasks(scan)
           GroupController.GetList()
           break
         case "0":
