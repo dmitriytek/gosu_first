@@ -8,6 +8,7 @@ class EmployeeMenu {
   function Start(scan : Scanner){
     while (true) {
       print("")
+      print("МЕНЮ УПРАВЛЕНИЯ СОТРУДНИКАМИ")
       print("Количество групп: " + Group.List.size())
       print("Количество сотрудников: " + Employee.List.where(\elt -> elt.getClass() == Employee).size())
       print("Количество задач: " + Task.List.size())

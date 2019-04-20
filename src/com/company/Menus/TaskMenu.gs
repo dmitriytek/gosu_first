@@ -8,7 +8,7 @@ class TaskMenu {
   function Start(scan : Scanner){
     while (true) {
       print("")
-      print("Меню управления задачами")
+      print("МЕНЮ УПРАВЛЕНИЯ ЗАДАЧАМИ")
       print("Количество задач: " + Task.List.size())
       print("Выберите действие")
       print("----------------------------")

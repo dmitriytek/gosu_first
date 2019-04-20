@@ -8,7 +8,7 @@ class GroupMenu {
   function Start(scan : Scanner){
     while (true) {
       print("")
-      print("Меню управления группами")
+      print("МЕНЮ УПРАВЛЕНИЯ ГРУППАМИ")
       print("Количество групп: " + Group.List.size())
       print("Выберите действие")
       print("----------------------------")

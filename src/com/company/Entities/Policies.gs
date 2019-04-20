@@ -6,7 +6,7 @@ uses java.text.SimpleDateFormat
 
 class Policies {
 
-  static var _count : long = 0
+  static var _count : long as readonly Count = 0
   static var _list : List<Policies> as List = {}
 
   var _id : long as readonly Id
@@ -27,57 +27,6 @@ class Policies {
     _count++;
   }
 
-  static function Create(scan : Scanner){
-    print("Выберите владельца")
-    Person.PrintList()
-    var owner = Person.List.get(scan.nextInt())
-    print("Выберите автомобиль")
-    Car.PrintList()
-    var car = Car.List.get(scan.nextInt())
-
-    print("Выберите покрытия")
-    print("Стекло (y|n)")
-    var glass : boolean
-    switch (scan.next()){
-      case "y":
-        glass = true
-        break
-      default:
-        glass = false
-        break
-    }
-    print("Фары (y|n)")
-    var lights : boolean
-    switch (scan.next()){
-      case "y":
-        lights = true
-        break
-      default:
-        lights = false
-        break
-    }
-    print("Угон (y|n)")
-    var st : boolean
-    switch (scan.next()){
-      case "y":
-        st = true
-        break
-      default:
-        st = false
-        break
-    }
-
-    print("Введите дату вступления в силу (dd.MM.yyyy)")
-    var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
-    var br = new BufferedReader(new InputStreamReader(System.in))
-
-    var coverage = new Coverage(car, glass, lights, st)
-    var policy = new Policies(owner, dateFormat.parse(br.readLine()), coverage)
-
-    print("id: " + policy.Id)
-    print("Стоимость: " + coverage.Price())
-  }
-
   function Print(){
     print("id: " + _id)
     print("Владелец: " + _owner.Name)
@@ -88,19 +37,13 @@ class Policies {
     print("Стоимость: " + price)
   }
 
-  static function PrintList(){
-    for (obj in List){
-      obj.Print()
-    }
-  }
-
   function ChangeCar(scan : Scanner){
     var versions = this.Versions
     var policy = versions.last()
     policy.Print()
 
     print("Выберите новый автомобиль")
-    Car.PrintList()
+    Car.List.each(\elt -> elt.Print())
     var car  = Car.List.get(scan.nextInt())
 
     print("Выберите покрытия")
@@ -153,19 +96,9 @@ class Policies {
     newPolicy.Print()
   }
 
-  static function PrintSpecificList(scan : Scanner){
-    print("Выберите полис")
-    PrintList()
-    var policies = List.get(scan.nextInt())
-    for (policy in policies.Versions.sortBy(\elt -> elt.StartDate)){
-      print("----------------------------")
-      policy.Print()
-    }
-  }
-
   function AddCar(scan : Scanner){
     print("Выберите автомобиль")
-    Car.PrintList()
+    Car.List.each(\elt -> elt.Print())
     var car = Car.List.get(scan.nextInt())
 
     print("Выберите покрытия")

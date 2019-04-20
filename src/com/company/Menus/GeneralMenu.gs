@@ -4,6 +4,9 @@ class GeneralMenu {
 
   function Start(scan : Scanner){
     while (true){
+      print("")
+      print("ГЛАВНОЕ МЕНЮ")
+      print("----------------------------")
       print("Выберите действие:")
       print("1. Меню контактов")
       print("2. Меню сотрудников")

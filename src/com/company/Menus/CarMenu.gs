@@ -8,7 +8,7 @@ class CarMenu {
   function Start(scan : Scanner){
     while (true) {
       print("")
-      print("Меню управления автомобилями")
+      print("МЕНЮ УПРАВЛЕНИЯ АВТОМОБИЛЯМИ")
       print("Количество автомобилей: " + Car.List.size())
       print("----------------------------")
       print("Выберите действие")

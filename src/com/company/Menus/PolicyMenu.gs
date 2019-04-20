@@ -1,13 +1,16 @@
 package com.company.Menus
 
 uses com.company.Entities.*
+uses com.company.Controller.*
 
 class PolicyMenu {
 
   function Start(scan : Scanner){
     while (true) {
       print("")
+      print("МЕНЮ УПРАВЛЕНИЯ ПОЛИСАМИ")
       print("Количество полисов: " + Policies.List.size())
+      print("----------------------------")
       print("Выберите действия")
       print("1. Создать новый полис")
       print("2. Удалить полис")
@@ -18,20 +21,26 @@ class PolicyMenu {
 
       switch (scan.next()){
         case "1":
+          print("")
+          PolicyController.Create(scan)
           break
         case "2":
+          print("")
+          PolicyController.Delete(scan)
           break
         case "3":
           print("Выберите полис")
-          Policies.PrintList()
+          Policies.List.each(\elt -> elt.Print())
           var menu = new EditPolicyMenu(Policies.List.get(scan.nextInt()))
           menu.Start(scan)
           break
         case "4":
+          print("")
+          PolicyController.GetList()
           break
         case "5":
-          break
-        case "6":
+          print("")
+          PolicyController.GetVersions(scan)
           break
         case "0":
           return;

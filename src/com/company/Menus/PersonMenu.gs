@@ -8,7 +8,7 @@ class PersonMenu {
   function Start(scan : Scanner){
     while (true) {
       print("")
-      print("Меню управления контактами")
+      print("МЕНЮ УПРАВЛЕНИЯ КОНТАКТАМИ")
       print("Всего контактов: " + Person.List.size())
       print("Выберите действие")
       print("----------------------------")
