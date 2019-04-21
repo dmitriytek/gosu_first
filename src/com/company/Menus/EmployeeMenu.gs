@@ -33,6 +33,11 @@ class EmployeeMenu {
           break
         case "3":
           print("")
+          print("Выберите сотрудника")
+          var employees = Employee.List.where(\elt -> elt.Class == Employee) as List<Employee>
+          employees.each(\elt -> elt.Print())
+          var menu = new EditEmployeeMenu(employees.get(scan.nextInt()))
+          menu.Start(scan)
           break
         case "4":
           print("")

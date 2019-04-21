@@ -80,4 +80,15 @@ class EmployeeController {
     Employee.List.where(\elt -> elt.getClass() == Employee).each(\elt -> elt.Print())
   }
 
+  static function ChangeGroup(emp : Employee,  scan : Scanner){
+    var groups = Group.List.where(\elt -> emp.Group != elt)
+    if (groups.isEmpty()){print("Нет других групп") return;}
+    print("Выберите группу")
+    groups.each(\elt -> elt.Print())
+    emp.Group = groups.get(scan.nextInt())
+    for (task in Task.List.where(\elt -> elt.Employee == emp)){
+      task.Employee = null
+    }
+  }
+
 }
