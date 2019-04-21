@@ -30,20 +30,4 @@ class Person {
       print("Категрия прав: " + _cat)
     }
   }
-
-  function ChangeName(scan : Scanner){
-    print("Введите новое имя")
-    _name = scan.nextLine()
-  }
-
-  function ChangeCategory(scan : Scanner){
-    print("Выберите категорию ('n' если нет прав)")
-    Category.AllValues.each(\elt -> print(elt))
-    var input  = scan.next()
-    if (input == "n"){
-      _cat = null
-      return;
-    }
-    _cat = Category.AllValues.get(Integer.parseInt(input))
-  }
 }

@@ -40,4 +40,8 @@ class Car {
     print("Марка: " + _manufacturer)
     print("Объем двигателя: " + _volume + "л.")
   }
+
+  function GetDrivers(){
+    _drivers.each(\elt -> elt.Print())
+  }
 }

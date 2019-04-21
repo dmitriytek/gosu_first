@@ -1,6 +1,7 @@
 package com.company.Menus
 
 uses com.company.Entities.Employee
+uses com.company.Controller.PersonController
 uses com.company.Controller.EmployeeController
 
 class EditEmployeeMenu {
@@ -28,11 +29,11 @@ class EditEmployeeMenu {
       switch (s){
         case "1":
           print("")
-          _employee.ChangeName(scan)
+          PersonController.ChangeName(_employee, scan)
           break
         case "2":
           print("")
-          _employee.ChangeCategory(scan)
+          PersonController.ChangeCategory(_employee, scan)
           break
         case "3":
           print("")

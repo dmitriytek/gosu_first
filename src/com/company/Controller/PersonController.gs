@@ -62,4 +62,20 @@ class PersonController {
   static function GetList(){
     Person.List.each(\elt -> elt.Print())
   }
+
+  static function ChangeName(person : Person, scan : Scanner){
+    print("Введите новое имя")
+    person.Name = scan.nextLine()
+  }
+
+  static function ChangeCategory(person : Person, scan : Scanner){
+    print("Выберите категорию ('n' если нет прав)")
+    Category.AllValues.each(\elt -> print(elt))
+    var input  = scan.next()
+    if (input == "n"){
+      person.Category = null
+      return;
+    }
+    person.Category = Category.AllValues.get(Integer.parseInt(input))
+  }
 }

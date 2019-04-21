@@ -21,6 +21,7 @@ class EditCarMenu {
       print("Выберите действие:")
       print("1. Добавить водителя")
       if (!_car.Drivers.isEmpty()) print("2. Удалить водителя")
+      print("3. Вывести список водителей")
       print("0. Вернуться")
 
       var s = scan.next()
@@ -31,6 +32,9 @@ class EditCarMenu {
           break
         case "2":
           CarController.RemoveDriver(_car, scan)
+          break
+        case "3":
+          _car.GetDrivers()
           break
         case "0":
           return;
