@@ -29,7 +29,7 @@ class EditPersonMenu {
           print("")
           _person.ChangeName(scan)
           break
-        case "3":
+        case "2":
           print("")
           _person.ChangeCategory(scan)
           break
