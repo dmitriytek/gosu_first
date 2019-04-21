@@ -66,4 +66,18 @@ class TaskController {
     Task.List.each(\elt -> elt.Print())
   }
 
+  static function ChangeDescription(task : Task, scan : Scanner){
+    print("Введите новое описание")
+    task.Description = scan.nextLine()
+  }
+
+  static function SetEmployee(task : Task, scan : Scanner){
+    var employees = Employee.List.where(\elt -> elt.Class == Employee) as List<Employee>
+    var inGroup = employees.where(\elt -> elt.Group == task.Group)
+    if (inGroup.isEmpty()){print("В группе нет сотрудников") return;}
+    print("Выберите сотрудника")
+    inGroup.each(\elt -> elt.Print())
+    task.Employee = inGroup.get(scan.nextInt())
+  }
+
 }

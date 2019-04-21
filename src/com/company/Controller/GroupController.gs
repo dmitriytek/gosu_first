@@ -23,7 +23,9 @@ class GroupController {
   static function Delete(scan : Scanner){
     print("Выберите группу для удаления")
     Group.List.each(\elt -> elt.Print())
-    Group.List.remove(scan.nextInt())
+    var group = Group.List.get(scan.nextInt())
+    Group.List.remove(group)
+    Task.List.where(\elt -> elt.Group == group).each(\elt -> Task.List.remove(elt))
 
     print("Удалить ещё? (y|n)")
     switch (scan.next()){

@@ -13,8 +13,9 @@ class TaskMenu {
       print("Выберите действие")
       print("----------------------------")
       print("1. Создать задачу")
-      print("2. Удалить Задачу")
-      print("3. Вывести список задач")
+      print("2. Удалить задачу")
+      print("3. Изменить задачу")
+      print("4. Вывести список задач")
       print("0. Вернуться в главное меню")
 
       switch (scan.next()){
@@ -27,6 +28,13 @@ class TaskMenu {
           TaskController.Delete(scan)
           break
         case "3":
+          print("")
+          print("Выберите задачу")
+          Task.List.each(\elt -> elt.Print())
+          var menu = new EditTaskMenu(Task.List.get(scan.nextInt()))
+          menu.Start(scan)
+          break
+        case "4":
           print("")
           TaskController.GetList()
           break
