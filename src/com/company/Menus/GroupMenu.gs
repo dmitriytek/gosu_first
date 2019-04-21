@@ -31,6 +31,10 @@ class GroupMenu {
           break
         case "3":
           print("")
+          print("Выберите группу")
+          Group.List.each(\elt -> elt.Print())
+          var menu = new EditGroupMenu(Group.List.get(scan.nextInt()))
+          menu.Start(scan)
           break
         case "4":
           print("")
