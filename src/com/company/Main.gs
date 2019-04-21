@@ -1,7 +1,6 @@
 package com.company
 
-uses com.company.Entities.*
-uses com.company.Menus.*
+uses com.company.Menus.GeneralMenu
 
 
 class Main {

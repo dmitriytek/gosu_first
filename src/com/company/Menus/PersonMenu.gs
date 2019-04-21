@@ -29,6 +29,10 @@ class PersonMenu {
           break
         case "3":
           print("")
+          print("Выберите контакт")
+          Person.List.each(\elt -> elt.Print())
+          var menu = new EditPersonMenu(Person.List.get(scan.nextInt()))
+          menu.Start(scan)
           break
         case "4":
           print("")
