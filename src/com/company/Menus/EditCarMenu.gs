@@ -1,6 +1,7 @@
 package com.company.Menus
 
-uses com.company.Entities.*
+uses com.company.Entities.Car
+uses com.company.Controller.CarController
 
 class EditCarMenu {
 
@@ -12,6 +13,11 @@ class EditCarMenu {
 
   function Start(scan : Scanner){
     while (true){
+      print("")
+      print("Выбран автомобиль:")
+      _car.Print()
+      print("Водителей: " + _car.Drivers.size())
+      print("----------------------------")
       print("Выберите действие:")
       print("1. Добавить водителя")
       print("2. Удалить водителя")
@@ -21,10 +27,10 @@ class EditCarMenu {
 
       switch (s){
         case "1":
-          _car.AddDriver(scan)
+          CarController.AddDriver(_car, scan)
           break
         case "2":
-          //_car.AddCar(scan)
+          CarController.RemoveDriver(_car, scan)
           break
         case "0":
           return;

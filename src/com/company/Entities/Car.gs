@@ -40,29 +40,4 @@ class Car {
     print("Марка: " + _manufacturer)
     print("Объем двигателя: " + _volume + "л.")
   }
-
-  function AddDriver(scan : Scanner){
-    print("Выберите водителя")
-    var candidates : List<Person> = {}
-    for (person in Person.List.where(\elt -> elt.Category == A or elt.Category == B)){
-      if (!_drivers.contains(person)){
-        candidates.add(person)
-      }
-    }
-    if (!candidates.isEmpty()){
-      candidates.each(\elt -> elt.Print())
-      _drivers.add(candidates.get(scan.nextInt()))
-
-      print("Добавить еще? (y|n)")
-      switch (scan.next()){
-        case "y":
-          AddDriver(scan)
-          break
-        default:
-          return;
-      }
-    } else{
-      print("Нет кандидатов")
-    }
-  }
 }
