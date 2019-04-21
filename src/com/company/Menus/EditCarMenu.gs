@@ -20,7 +20,7 @@ class EditCarMenu {
       print("----------------------------")
       print("Выберите действие:")
       print("1. Добавить водителя")
-      print("2. Удалить водителя")
+      if (!_car.Drivers.isEmpty()) print("2. Удалить водителя")
       print("0. Вернуться")
 
       var s = scan.next()
