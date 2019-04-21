@@ -1,7 +1,6 @@
 package com.company.Menus
 
-uses com.company.Entities.*
-uses com.company.Controller.*
+uses com.company.Entities.Person
 
 class EditPersonMenu {
 

@@ -20,4 +20,17 @@ class Group {
     print("Название: " + _name)
     print("Сотрудников: " + Employee.List.where(\elt -> elt.getClass() == Employee).where(\elt -> (elt as Employee).Group == this))
   }
+
+  function GetEmployeeList(){
+    var employees = Employee.List.where(\elt -> elt.getClass() == Employee) as List<Employee>
+    employees.where(\elt -> elt.Group == this).each(\elt -> elt.Print())
+  }
+
+  function AddEmployee(employee : Employee){
+    employee.Group = this
+  }
+
+  function RemoveEmployee(employee : Employee){
+    employee.Group = null
+  }
 }

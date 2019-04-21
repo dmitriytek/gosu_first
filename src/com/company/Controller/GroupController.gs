@@ -52,4 +52,23 @@ class GroupController {
     Task.List.where(\elt -> elt.Group == Group.List.get(scan.nextInt())).each(\elt -> elt.Print())
   }
 
+  static function AddEmployee(group : Group, scan : Scanner){
+    var employees = Employee.List.where(\elt -> elt.getClass() == Employee) as List<Employee>
+    var groupless = employees.where(\elt -> elt.Group == null)
+    if (groupless.isEmpty()){
+      print("нет свободных сотрудников")
+    } else {
+      print("Выберите сотрудника")
+      group.AddEmployee(groupless.get(scan.nextInt()))
+    }
+  }
+
+  static function RemoveEmployee(group : Group, scan : Scanner){
+    var employees = Employee.List.where(\elt -> elt.getClass() == Employee) as List<Employee>
+    var inGroup = employees.where(\elt -> elt.Group == group)
+    if(inGroup.isEmpty()){ print("данная группа пуста") return;}
+    print("Выберите сотрудника")
+    inGroup.each(\elt -> elt.Print())
+    group.RemoveEmployee(inGroup.get(scan.nextInt()))
+  }
 }
