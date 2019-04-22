@@ -49,7 +49,9 @@ class Coverage {
     if (_hasStealing){
       price += (150 * _car.Volume)
     }
-    return price
+    var discount : double = _car.GetMaxStage() / 100
+
+    return (price * (1-discount))
   }
 
 }

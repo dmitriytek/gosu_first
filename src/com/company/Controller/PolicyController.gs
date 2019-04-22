@@ -67,9 +67,11 @@ class PolicyController {
     print("Введите дату вступления в силу (dd.MM.yyyy)")
     var dateFormat = new SimpleDateFormat("dd.MM.yyyy")
     var br = new BufferedReader(new InputStreamReader(System.in))
+    var start = dateFormat.parse(br.readLine())
+    var finish = start.addYears(1)
 
     var coverage = new Coverage(car, glass, lights, st)
-    var policy = new Policies(owner, dateFormat.parse(br.readLine()), coverage)
+    var policy = new Policies(owner, start, finish, coverage)
 
     print("id: " + policy.Id)
     print("Стоимость: " + coverage.Price())

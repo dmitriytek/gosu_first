@@ -44,4 +44,20 @@ class Car {
   function GetDrivers(){
     _drivers.each(\elt -> elt.Print())
   }
+
+  function GetMaxStage() : int{
+    var maxStage : int
+    if (_drivers.isEmpty()){
+      maxStage = 0
+      return maxStage
+    }
+    maxStage = _drivers.get(0).GetStage()
+    for (driver in _drivers){
+      var recentStage = driver.GetStage()
+      if (recentStage > maxStage){
+        maxStage = recentStage
+      }
+    }
+    return maxStage
+  }
 }

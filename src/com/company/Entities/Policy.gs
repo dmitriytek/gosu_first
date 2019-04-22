@@ -74,4 +74,12 @@ class Policy {
       coverage.Print()
     }
   }
+
+  function Price() : double{
+    var price : double = 0
+    for (cover in _coverages){
+      price += cover.Price()
+    }
+    return price
+  }
 }

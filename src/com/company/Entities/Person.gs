@@ -32,7 +32,11 @@ class Person {
       print("Прав нет")
     } else {
       print("Категрия прав: " + _cat)
-      print("Стаж: " + TimeUtil.GetYears(Period.between(LocalDate.now(), _dLDay).getYears()))
+      print("Стаж: " + TimeUtil.GetYears(Period.between(_dLDay, LocalDate.now()).getYears()))
     }
+  }
+
+  function GetStage() : int {
+    return Period.between(_dLDay, LocalDate.now()).getYears()
   }
 }
