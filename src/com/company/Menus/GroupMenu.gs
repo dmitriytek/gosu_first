@@ -33,7 +33,7 @@ class GroupMenu {
           print("")
           print("Выберите группу")
           Group.List.each(\elt -> elt.Print())
-          var menu = new EditGroupMenu(Group.List.get(scan.nextInt()))
+          var menu = new EditGroupMenu(Group.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
           menu.Start(scan)
           break
         case "4":

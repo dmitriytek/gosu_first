@@ -54,7 +54,7 @@ class PersonController {
     print("Выберите контакт для удаления")
     var persons = Person.List.where(\elt -> elt.Class != Employee).copy()
     persons.each(\elt -> elt.Print())
-    Person.List.remove(persons.get(scan.nextInt()))
+    Person.List.remove(persons.firstWhere(\elt -> elt.Id == scan.nextLong()))
 
     print("Удалить ещё? (y|n)")
     switch (scan.next()){

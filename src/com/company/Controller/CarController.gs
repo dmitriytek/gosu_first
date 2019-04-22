@@ -30,7 +30,7 @@ class CarController {
   static function Delete(scan : Scanner){
     print("Выберите автомобиль")
     Car.List.each(\elt -> elt.Print())
-    Car.List.remove(scan.nextInt())
+    Car.List.remove(Car.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
 
     print("Удалить ещё? (y|n)")
     switch (scan.next()){
@@ -49,7 +49,7 @@ class CarController {
   static function GetDrivers(scan : Scanner){
     print("Выберите автомобиль")
     Car.List.each(\elt -> elt.Print())
-    Car.List.get(scan.nextInt()).Drivers.each(\elt -> elt.Print())
+    Car.List.firstWhere(\elt -> elt.Id == scan.nextLong()).Drivers.each(\elt -> elt.Print())
   }
 
   static function AddDriver(car: Car, scan : Scanner){
@@ -62,7 +62,7 @@ class CarController {
     }
     if (!candidates.isEmpty()){
       candidates.each(\elt -> elt.Print())
-      car.Drivers.add(candidates.get(scan.nextInt()))
+      car.Drivers.add(candidates.firstWhere(\elt -> elt.Id == scan.nextLong()))
 
       print("Добавить еще? (y|n)")
       switch (scan.next()){
@@ -81,7 +81,7 @@ class CarController {
     if (car.Drivers.isEmpty()){print("Нет водителей") return;}
     print("Выберите водителя")
     car.Drivers.each(\elt -> elt.Print())
-    car.Drivers.remove(scan.nextInt())
+    car.Drivers.remove(car.Drivers.firstWhere(\elt -> elt.Id == scan.nextLong()))
 
     if(!car.Drivers.isEmpty()){
       print("Удалить еще? (y|n)")

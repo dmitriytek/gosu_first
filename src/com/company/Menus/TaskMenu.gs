@@ -31,7 +31,7 @@ class TaskMenu {
           print("")
           print("Выберите задачу")
           Task.List.each(\elt -> elt.Print())
-          var menu = new EditTaskMenu(Task.List.get(scan.nextInt()))
+          var menu = new EditTaskMenu(Task.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
           menu.Start(scan)
           break
         case "4":

@@ -32,7 +32,7 @@ class CarMenu {
           print("")
           print("Выберите автомобиль")
           Car.List.each(\elt -> elt.Print())
-          var menu = new EditCarMenu(Car.List.get(scan.nextInt()))
+          var menu = new EditCarMenu(Car.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
           menu.Start(scan)
           break
         case "4":

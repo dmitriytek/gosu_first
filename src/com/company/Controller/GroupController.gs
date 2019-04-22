@@ -23,7 +23,7 @@ class GroupController {
   static function Delete(scan : Scanner){
     print("Выберите группу для удаления")
     Group.List.each(\elt -> elt.Print())
-    var group = Group.List.get(scan.nextInt())
+    var group = Group.List.firstWhere(\elt -> elt.Id == scan.nextLong())
     Group.List.remove(group)
     Task.List.where(\elt -> elt.Group == group).each(\elt -> Task.List.remove(elt))
 
@@ -45,13 +45,13 @@ class GroupController {
     print("Выберите группу")
     Group.List.each(\elt -> elt.Print())
     var employees = Employee.List.where(\elt -> elt.getClass() == Employee) as List<Employee>
-    employees.where(\elt -> elt.Group == Group.List.get(scan.nextInt())).each(\elt -> elt.Print())
+    employees.where(\elt -> elt.Group == Group.List.firstWhere(\elt1 -> elt1.Id == scan.nextLong())).each(\elt -> elt.Print())
   }
 
   static function GetGroupTasks(scan : Scanner){
     print("Выберите группу")
     Group.List.each(\elt -> elt.Print())
-    Task.List.where(\elt -> elt.Group == Group.List.get(scan.nextInt())).each(\elt -> elt.Print())
+    Task.List.where(\elt -> elt.Group == Group.List.firstWhere(\elt1 -> elt1.Id == scan.nextLong())).each(\elt -> elt.Print())
   }
 
   static function AddEmployee(group : Group, scan : Scanner){
@@ -61,7 +61,7 @@ class GroupController {
       print("нет свободных сотрудников")
     } else {
       print("Выберите сотрудника")
-      group.AddEmployee(groupless.get(scan.nextInt()))
+      group.AddEmployee(groupless.firstWhere(\elt -> elt.Id == scan.nextLong()))
     }
   }
 
@@ -71,6 +71,6 @@ class GroupController {
     if(inGroup.isEmpty()){ print("данная группа пуста") return;}
     print("Выберите сотрудника")
     inGroup.each(\elt -> elt.Print())
-    group.RemoveEmployee(inGroup.get(scan.nextInt()))
+    group.RemoveEmployee(inGroup.firstWhere(\elt -> elt.Id == scan.nextLong()))
   }
 }

@@ -11,7 +11,7 @@ class PolicyController {
   static function Create(scan : Scanner){
     print("Выберите владельца")
     Person.List.each(\elt -> elt.Print())
-    var owner = Person.List.get(scan.nextInt())
+    var owner = Person.List.firstWhere(\elt -> elt.Id == scan.nextLong())
     print("Выберите автомобиль")
     var carFilter : List<Car> = {}
     for (policies in Policies.List){
@@ -28,9 +28,7 @@ class PolicyController {
     }
 
     filteredCars.each(\elt -> elt.Print())
-    var car = filteredCars.get(scan.nextInt())
-    //Car.List.each(\elt -> elt.Print())
-    //var car = Car.List.get(scan.nextInt())
+    var car = filteredCars.firstWhere(\elt -> elt.Id == scan.nextLong())
 
     print("Выберите покрытия")
     print("Стекло (y|n)")
@@ -80,7 +78,7 @@ class PolicyController {
   static function Delete(scan : Scanner){
     print("Выберите полис")
     Policies.List.each(\elt -> elt.Print())
-    var policies = Policies.List.get(scan.nextInt())
+    var policies = Policies.List.firstWhere(\elt -> elt.Id == scan.nextLong())
     policies.Versions.each(\elt -> Policy.List.remove(elt))
     Policies.List.remove(policies)
 
@@ -102,7 +100,7 @@ class PolicyController {
   static function GetVersions(scan : Scanner){
     print("Выберите полис")
     Policies.List.each(\elt -> elt.Print())
-    Policies.List.get(scan.nextInt()).Versions.sortBy(\elt -> elt.StartDate).each(\elt -> elt.Print())
+    Policies.List.firstWhere(\elt -> elt.Id == scan.nextLong()).Versions.sortBy(\elt -> elt.StartDate).each(\elt -> elt.Print())
   }
 
   static function ChangeCar(policies : Policies, scan : Scanner){
@@ -112,7 +110,7 @@ class PolicyController {
 
     print("Выберите новый автомобиль")
     Car.List.each(\elt -> elt.Print())
-    var car  = Car.List.get(scan.nextInt())
+    var car  = Car.List.firstWhere(\elt -> elt.Id == scan.nextLong())
 
     print("Выберите покрытия")
     print("Стекло (y|n)")
@@ -167,7 +165,7 @@ class PolicyController {
   static function AddCar(policies: Policies, scan : Scanner){
     print("Выберите автомобиль")
     Car.List.each(\elt -> elt.Print())
-    var car = Car.List.get(scan.nextInt())
+    var car = Car.List.firstWhere(\elt -> elt.Id == scan.nextLong())
 
     print("Выберите покрытия")
     print("Стекло (y|n)")

@@ -77,7 +77,7 @@ class TaskController {
     if (inGroup.isEmpty()){print("В группе нет сотрудников") return;}
     print("Выберите сотрудника")
     inGroup.each(\elt -> elt.Print())
-    task.Employee = inGroup.get(scan.nextInt())
+    task.Employee = inGroup.firstWhere(\elt -> elt.Id == scan.nextLong())
   }
 
 }

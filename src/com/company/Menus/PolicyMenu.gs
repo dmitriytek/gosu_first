@@ -31,7 +31,7 @@ class PolicyMenu {
         case "3":
           print("Выберите полис")
           Policies.List.each(\elt -> elt.Print())
-          var menu = new EditPolicyMenu(Policies.List.get(scan.nextInt()))
+          var menu = new EditPolicyMenu(Policies.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
           menu.Start(scan)
           break
         case "4":

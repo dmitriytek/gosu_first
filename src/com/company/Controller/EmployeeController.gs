@@ -25,7 +25,7 @@ class EmployeeController {
         group = Group.List.last()
         break
       default:
-        group = Group.List.get(Integer.parseInt(s))
+        group = Group.List.firstWhere(\elt -> elt.Id == scan.nextLong())
         break
     }
     print("Введите имя")
@@ -71,7 +71,7 @@ class EmployeeController {
     print("Выберите сотрудника для удаления")
     var elmployees = Employee.List.where(\elt -> elt.getClass() == Employee).copy() as List<Employee>
     elmployees.each(\elt -> elt.Print())
-    Employee.List.remove(elmployees.get(scan.nextInt()))
+    Employee.List.remove(elmployees.firstWhere(\elt -> elt.Id == scan.nextLong()))
 
     print("Удалить ещё? (y|n)")
     switch (scan.next()){
@@ -92,7 +92,7 @@ class EmployeeController {
     if (groups.isEmpty()){print("Нет других групп") return;}
     print("Выберите группу")
     groups.each(\elt -> elt.Print())
-    emp.Group = groups.get(scan.nextInt())
+    emp.Group = groups.firstWhere(\elt -> elt.Id == scan.nextLong())
     for (task in Task.List.where(\elt -> elt.Employee == emp)){
       task.Employee = null
     }

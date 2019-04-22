@@ -31,7 +31,7 @@ class PersonMenu {
           print("")
           print("Выберите контакт")
           Person.List.each(\elt -> elt.Print())
-          var menu = new EditPersonMenu(Person.List.get(scan.nextInt()))
+          var menu = new EditPersonMenu(Person.List.firstWhere(\elt -> elt.Id == scan.nextLong()))
           menu.Start(scan)
           break
         case "4":
