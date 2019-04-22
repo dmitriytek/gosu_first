@@ -1,6 +1,9 @@
 package com.company.Entities
 
+uses java.time.*
+
 uses com.company.Enum.Category
+uses com.company.Utils.*
 
 class Person {
   static var _count : long as readonly Count = 0
@@ -10,6 +13,7 @@ class Person {
   var _name : String as Name
   var _cat : Category as Category
   var _birthday : Date as readonly Birthday
+  var _dLDay : LocalDate as LicenseDay
 
   var _car : Car as Car
 
@@ -26,8 +30,9 @@ class Person {
     print("Дата рождения: " + _birthday)
     if(_cat == null){
       print("Прав нет")
-    }else {
+    } else {
       print("Категрия прав: " + _cat)
+      print("Стаж: " + TimeUtil.GetYears(Period.between(LocalDate.now(), _dLDay).getYears()))
     }
   }
 }

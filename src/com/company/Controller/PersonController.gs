@@ -6,6 +6,8 @@ uses com.company.Enum.Category
 uses java.io.BufferedReader
 uses java.io.InputStreamReader
 uses java.text.SimpleDateFormat
+uses java.time.*
+uses java.time.format.DateTimeFormatter
 
 class PersonController {
 
@@ -22,14 +24,19 @@ class PersonController {
     print("2. B")
     print("0 если нет прав")
     var cat = scan.next()
-    switch (cat) {
-      case "1":
-        person.Category = Category.A
-        break
-      case "2":
-        person.Category = Category.B
-      default:
-        break
+    if ((cat == "1") or (cat == "2")){
+      switch (cat) {
+        case "1":
+          person.Category = Category.A
+          break
+        case "2":
+          person.Category = Category.B
+        default:
+          break
+      }
+      print("Введите дату получения прав (dd.mm.yyyy)")
+      var formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+      person.LicenseDay = LocalDate.parse(scan.next(), formatter)
     }
     print("id: " + person.Id)
     Person.List.add(person)
